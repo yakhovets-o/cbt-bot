@@ -1,0 +1,22 @@
+version: '3.8'
+networks:
+  main:
+
+services:
+  bot:
+    build: .
+    volumes:
+      - .:/app
+    command: python main.py
+    networks:
+      - main
+    depends_on:
+      - redis
+  redis:
+    image: redis:alpine
+    hostname: redis
+    ports:
+      - '6379:6379'
+    networks:
+      - main
+
